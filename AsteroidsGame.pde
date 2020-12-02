@@ -1,12 +1,16 @@
 Spaceship sharp = new Spaceship();
 Star[] mochi = new Star[200];
+ArrayList<Asteroids> flame = new ArrayList<Asteroids>();
 public void setup() 
 {
-  size(400,400);
+  size(700,700);
   background(0);
   for(int i = 0; i < mochi.length; i++){
     mochi[i] = new Star();
   }
+  for (int j = 0; j < 25; j++) {
+      flame.add(new Asteroids());
+    }
 }
 
 public void draw() 
@@ -16,6 +20,15 @@ public void draw()
   sharp.move();
   for(int i = 0; i < mochi.length; i++){
     mochi[i].show();
+  }
+  for (int i = 0; i < flame.size(); i++)
+  {
+   flame.get(i).show();
+   flame.get(i).move();
+   if (dist(flame.get(i).getX(), flame.get(i).getY(), sharp.getX(), sharp.getY()) < 20)
+    {
+      flame.remove(i);
+    }
   }
 }
 
